@@ -2,7 +2,7 @@ import axios from 'axios'
 import Vuex from 'vuex'
 import Vue from 'vue'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 //to handle state
 const state = {
@@ -10,23 +10,21 @@ const state = {
 }
 
 //to handle state
-const getters = {}
+const getters = {
+    allPosts: (state) => state.posts
+}
 
 //to handle actions
 const actions = {
-    getPosts({ commit }) {
-        axios.get('https://private-517bb-wad20postit.apiary-mock.com/posts')
-        .then(response => {
-            commit('SET_POSTS', response.data)
-        })
+    async getPosts({ commit }) {
+        const response = await axios.get('https://private-517bb-wad20postit.apiary-mock.com/posts');
+        commit('SET_POSTS', response.data);
     }
 }
 
 //to handle mutations
 const mutations = {
-    SET_POSTS(state, posts) {
-        state.posts = posts
-    }
+    SET_POSTS: (state, posts) => (state.posts = posts)
 }
 
 //export store module

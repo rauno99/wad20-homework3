@@ -9,10 +9,10 @@
                 <input type="text" name="search"><button type="button">Search</button>
                 </div>
                 <div class="avatar-container">
-                <img class="avatar">
+                <img class="avatar" :src="theUser.avatar">
                 <div class="drop-down-container">
-                    <span id="user-name">John Doe</span>
-                    <span id="user-email"></span>
+                    <span id="user-name">{{ theUser.firstname }}</span>
+                    <span id="user-email">{{ theUser.email }}</span>
                     <span class="separator"></span>
                     <span>
                     <a href="browse.html">Browse</a>
@@ -33,11 +33,22 @@
 
 <script>
 import Posts from "./Posts"
+import { mapGetters , mapActions} from 'vuex'
 
 export default {
     name: 'Index',
     components: {
         Posts
+    },
+    data: function() {
+        return {
+            dropDownClicked: false
+        }
+    },
+    methods: mapActions(['getUser']),
+    computed: mapGetters(['theUser']),
+    created() {
+        this.getUser();
     }
 }
 

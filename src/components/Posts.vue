@@ -21,7 +21,7 @@
                 <h3>{{post.text}}</h3>
             </div>
             <div class="post-actions">
-                <button class="like-button" type="button" name="like" :class="{'liked': clicked}" @click="clicked = !clicked">{{ post.likes }}</button>
+                <button class="like-button" type="button" name="like" @click="toggleFunction($event)"> {{ post.likes }}</button>
             </div>
 
         </div>
@@ -37,7 +37,14 @@
                 clicked: false
             }
         },
-        methods: mapActions(['getPosts']),         
+        methods: {
+            ...mapActions(['getPosts']),
+            
+            toggleFunction: function(event) {
+                let button = event.target;
+                button.classList.toggle('liked');
+            }
+        },         
         computed: mapGetters(['allPosts']),
         created() {
             this.getPosts();
@@ -122,6 +129,7 @@
         line-height: 10px;
         text-align: left;
         border: none;
+        cursor: pointer;
     }
 
     .like-button.liked {

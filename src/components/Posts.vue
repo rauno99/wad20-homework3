@@ -1,7 +1,29 @@
 <template>
     <div>
         <div v-for="post in allPosts"  :key="post.id" class="post">
-            {{post.text}}
+            <div class="post-author">
+                <span class="post-author-info">
+                    <img :src="post.author.avatar" alt="Post author">
+                    <small>{{ post.author.firstname }} {{post.author.lastname }}</small>
+                </span>
+                <small>{{ post.createTime }}</small>
+            </div>
+
+            <div v-if="post.media !== null && post.media.type ==='image'" class="post-image">
+                <img :src="post.media.url" alt="Post image">
+            </div>
+            <div v-if="post.media !== null && post.media.type ==='video'" class="post-video">
+                <video controls>
+                    <source :src="post.media.url" alt="Post video">
+                </video>
+            </div>
+            <div v-if="post.text !== null" class="post-title">
+                <h3>{{post.text}}</h3>
+            </div>
+            <div class="post-actions">
+                <button class="like-button" type="button" name="like" :class="{'liked': clicked}" @click="clicked = !clicked">{{ post.likes }}</button>
+            </div>
+
         </div>
     </div>
 </template>
@@ -10,6 +32,11 @@
     import { mapGetters, mapActions } from 'vuex'
     export default {
         name: "Posts",
+        data: function() {
+            return {
+                clicked: false
+            }
+        },
         methods: mapActions(['getPosts']),         
         computed: mapGetters(['allPosts']),
         created() {

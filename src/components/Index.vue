@@ -9,8 +9,8 @@
                 <input type="text" name="search"><button type="button">Search</button>
                 </div>
                 <div class="avatar-container">
-                <img class="avatar" :src="theUser.avatar">
-                <div class="drop-down-container">
+                <img @click="dropDownClicked = !dropDownClicked" class="avatar" :src="theUser.avatar" >
+                <div id="myDropdown" class="drop-down-container" v-show='dropDownClicked'>
                     <span id="user-name">{{ theUser.firstname }}</span>
                     <span id="user-email">{{ theUser.email }}</span>
                     <span class="separator"></span>
@@ -40,7 +40,7 @@ export default {
     components: {
         Posts
     },
-    data: function() {
+    data: function () {
         return {
             dropDownClicked: false
         }
@@ -51,6 +51,7 @@ export default {
         this.getUser();
     }
 }
+
 
 </script>
 
@@ -164,7 +165,6 @@ export default {
         right: 0;
         top: 50px;
         text-align: left;
-        display: none;
     }
     .drop-down-container span{
         display: block;

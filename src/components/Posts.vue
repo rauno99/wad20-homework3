@@ -39,12 +39,12 @@
         },
         methods: {
             ...mapActions(['getPosts']),
-            
+
             toggleFunction: function(event) {
                 let button = event.target;
                 button.classList.toggle('liked');
             }
-        },         
+        },
         computed: mapGetters(['allPosts']),
         created() {
             this.getPosts();
@@ -83,6 +83,7 @@
         object-fit: cover;
         object-position: top;
         margin: 5px;
+        float: left;
     }
 
     .post .post-author .post-author-info small {

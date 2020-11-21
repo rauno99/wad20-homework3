@@ -11,15 +11,17 @@
                 <div class="avatar-container">
                 <img @click="dropDownClicked = !dropDownClicked" class="avatar" :src="theUser.avatar" >
                 <div id="myDropdown" class="drop-down-container" v-show='dropDownClicked'>
-                    <span id="user-name">{{ theUser.firstname }}</span>
+                    <span id="user-name">{{ theUser.firstname }} {{theUser.lastname}}</span>
                     <span id="user-email">{{ theUser.email }}</span>
                     <span class="separator"></span>
                     <span>
-                    <a href="browse.html">Browse</a>
+                        <router-view />
+                        <router-link tag="a" to="Browse" >Browse</router-link>
                     </span>
                     <span class="separator"></span>
                     <span>
-                    <a href="login.html">Log Out</a>
+                        <router-view />
+                        <router-link tag="a" to="/" >Log Out</router-link>
                     </span>
                 </div>
                 </div>
@@ -131,6 +133,7 @@ export default {
         border-radius: 100%;
         object-fit: cover;
         object-position: top center;
+        cursor: pointer;
     }
 
     nav div.search-container > input {

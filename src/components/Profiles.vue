@@ -8,7 +8,7 @@
                 <h3>{{ profile.firstname }} {{ profile.lastname }}</h3>
             </div>
             <div class="profile-actions">
-                <button type="button" name="Follow" class="followButton" @click="toggleFunction($event)">{{ text }}</button>
+                <button type="button" name="Follow" class="followButton" @click="toggleFunction($event)">Follow</button>
             </div>
         </div>
     </div>
@@ -22,7 +22,6 @@
         data: function() {
             return {
                 clicked: false,
-                text: "Follow"
             }
         },
 
@@ -32,7 +31,10 @@
             toggleFunction: function(event) {
                 let button = event.target;
                 button.classList.toggle('followed');
-                button.text = "Followed";
+                if (button.innerHTML == "Follow")
+                    button.innerHTML = "Followed";
+                else
+                    button.innerHTML = "Follow"
             }
         },
         computed: mapGetters(['allProfiles']),
